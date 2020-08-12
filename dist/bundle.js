@@ -90,10 +90,22 @@
 /*!********************!*\
   !*** ./src/app.js ***!
   \********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./audio */ \"./src/audio/index.js\");\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nlet soundLevel = 0\r\n_audio__WEBPACK_IMPORTED_MODULE_0___default()( x => {\r\n  if(x) \r\n      soundLevel = x  \r\n})\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
+
+/***/ }),
+
+/***/ "./src/audio/index.js":
+/*!****************************!*\
+  !*** ./src/audio/index.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("// Courtesy www/0AV.com, LGPL license or as set by forked host, Travis Holliday, https://codepen.io/travisholliday/pen/gyaJk \r\n const getMicSoundLevel = (cb) => {\r\n\tnavigator.getUserMedia = navigator.getUserMedia ||\r\n\tnavigator.webkitGetUserMedia ||\r\n\tnavigator.mozGetUserMedia;\r\n\tif (navigator.getUserMedia) {\r\n\tnavigator.getUserMedia({\r\n\taudio: true\r\n\t}, function(stream) {\r\n\t\taudioContext = new AudioContext();\r\n\t\tanalyser = audioContext.createAnalyser();\r\n\t\tmicrophone = audioContext.createMediaStreamSource(stream);\r\n\t\tjavascriptNode = audioContext.createScriptProcessor(2048, 1, 1);\r\n   \r\n\t\tanalyser.smoothingTimeConstant = 0.8;\r\n\t\tanalyser.fftSize = 1024;\r\n   \r\n\t\tmicrophone.connect(analyser);\r\n\t\tanalyser.connect(javascriptNode);\r\n\t\tjavascriptNode.connect(audioContext.destination);\r\n   \r\n   \r\n\t\tjavascriptNode.onaudioprocess = () => {\r\n\t\t\tlet array = new Uint8Array(analyser.frequencyBinCount);\r\n\t\t\tanalyser.getByteFrequencyData(array);\r\n\t\t\tlet values = 0;\r\n   \r\n\t\t\tlet length = array.length;\r\n\t\t\tfor (let i = 0; i < length; i++) {\r\n\t\t\t  values += (array[i]);\r\n\t\t\t}\r\n\t\t\tif(typeof cb === \"function\")\r\n\t\t\tcb(values)   \r\n\t\t} \r\n\t   },\r\n\t   function(err) {\r\n\t\t console.log(\"The following error occured: \" + err.name)\r\n\t   });\r\n   } else {\r\n\t console.log(\"getUserMedia not supported\");\r\n\t}\r\n   }\r\n\r\n\r\n   getMicSoundLevel()\r\n   module.exports = getMicSoundLevel\n\n//# sourceURL=webpack:///./src/audio/index.js?");
 
 /***/ })
 
