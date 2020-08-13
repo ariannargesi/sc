@@ -4,7 +4,7 @@ const states = {
     gameSpeed: 1,
     gameInPlay: false,
     gameOver: false,
-    animationReapet: null
+    sensitivity: 0.05
 }
 
 export default states
