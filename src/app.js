@@ -6,7 +6,7 @@ import createHedges from './hedges'
 let soundLevel = 0
 getMicSoundLevel( x => {
   if(x) 
-      soundLevel = x * states.sensitivity
+      soundLevel = Math.round(x * states.sensitivity)
 })
 
 document.addEventListener('keydown', e => {
@@ -27,13 +27,17 @@ const updateScreen = () => {
     // get container height 
     const containerHeight = Math.round(nodes.container.getBoundingClientRect().height)
     // distance from top 
-    const characterOffsetTop = nodes.character.offsetTop
+    const characterOffsetTop = nodes.character.offsetTop      
                           //if character is not touching the bottom
-    if(soundLevel < 400 && characterOffsetTop < containerHeight - 50 ) {
-        nodes.character.style.top = characterOffsetTop +4 + "px"
+    if(soundLevel < 600 && soundLevel > 150 && characterOffsetTop < containerHeight - 50 && states.lock === false  ) {
+        nodes.character.style.top = characterOffsetTop + states.gameSpeed *2 + "px"
     }                    // if character is not touching the top
-    else if(soundLevel > 400 && characterOffsetTop > 0){
-      nodes.character.style.top = characterOffsetTop -4 + "px"
+    else if(soundLevel > 550 && characterOffsetTop > 0){
+      nodes.character.style.top = characterOffsetTop - states.gameSpeed *2 + "px"
+      states.lock = true 
+      setTimeout(() => {
+        states.lock = false 
+      }, 2000)
     }
     moveHedges()
     updateScore()
@@ -45,11 +49,15 @@ const moveHedges = () => {
   const hedges = document.getElementsByClassName('hedge')
   for(let hedge of hedges) {
       let hedgeLeft = Math.round(hedge.getBoundingClientRect().left)
-      hedgeLeft-= 2
+      hedgeLeft-= states.gameSpeed
       if(hedgeLeft <= -30){
         nodes.container.removeChild(hedge)
       }
       hedge.style.left = hedgeLeft + 'px'
+      if(RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())){
+          states.gameOver = true 
+      }
+
   }
 }
 const updateScore = () => {
@@ -62,12 +70,27 @@ const updateScore = () => {
     const distance = hedgeDistanceFromLeft - characterDistanceFromLeft
     if(distance >= -3)
       distances.push(hedge)  
-  }
-
-  if(distances.length){
-    if(distances[0].offsetLeft+30 < nodes.character.offsetLeft) {
-      states.playerScore++
+  }  
       nodes.score.innerHTML = states.playerScore
-    }
-    }
+}
+setInterval(() => {
+  states.playerScore++
+}, 1000)
+
+
+  
+  // return true if the rectangle and circle are colliding
+  function RectCircleColliding(circle,rect){
+      var distX = Math.abs(circle.x - rect.x-rect.width  /2);
+      var distY = Math.abs(circle.y - rect.y-rect.height/2);
+  
+      if (distX > (rect.width/2 + 10)) { return false; }
+      if (distY > (rect.height/2 + 10)) { return false; }
+  
+      if (distX <= (rect.width/2)) { return true; } 
+      if (distY <= (rect.height/2)) { return true; }
+  
+      var dx=distX-rect.width/2;
+      var dy=distY-rect.height/2;
+      return (dx*dx+dy*dy<=(10*10)); 
 }
