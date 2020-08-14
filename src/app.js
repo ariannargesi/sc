@@ -36,6 +36,7 @@ const updateScreen = () => {
       nodes.character.style.top = characterOffsetTop -4 + "px"
     }
     moveHedges()
+    updateScore()
     requestAnimationFrame(updateScreen)
   }
 }
@@ -44,7 +45,6 @@ const moveHedges = () => {
   const hedges = document.getElementsByClassName('hedge')
   for(let hedge of hedges) {
       let hedgeLeft = Math.round(hedge.getBoundingClientRect().left)
-      console.log(hedgeLeft)
       hedgeLeft-= 2
       if(hedgeLeft <= -30){
         nodes.container.removeChild(hedge)
@@ -52,4 +52,22 @@ const moveHedges = () => {
       hedge.style.left = hedgeLeft + 'px'
   }
 }
+const updateScore = () => {
+  const distances = []
+  const hedges = document.getElementsByClassName('hedge')
 
+  for(let hedge of hedges) {
+    const hedgeDistanceFromLeft = hedge.offsetLeft + 30 
+    const characterDistanceFromLeft = nodes.character.offsetLeft 
+    const distance = hedgeDistanceFromLeft - characterDistanceFromLeft
+    if(distance >= -3)
+      distances.push(hedge)  
+  }
+
+  if(distances.length){
+    if(distances[0].offsetLeft+30 < nodes.character.offsetLeft) {
+      states.playerScore++
+      nodes.score.innerHTML = states.playerScore
+    }
+    }
+}
