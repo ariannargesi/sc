@@ -17,3 +17,10 @@ body {
     top: 50%;
     left: 10%;
 }
+.hedge {
+    background: greenyellow;
+    position: absolute;
+    height: 100px;
+    width: 30px;
+    right: 0;
+}

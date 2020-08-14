@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./audio */ \"./src/audio/index.js\");\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ \"./src/state/index.js\");\n\r\n\r\n//always contain the latest value of microphone sound level\r\nlet soundLevel = 0\r\n_audio__WEBPACK_IMPORTED_MODULE_0___default()( x => {\r\n  if(x) \r\n      soundLevel = x  \r\n})\r\ndocument.addEventListener(\"keydown\", e => {\r\n  const keyCode = e.keyCode \r\n  if(keyCode === 32){\r\n    startGame()\r\n  }\r\n})\r\nconst startGame = () => {\r\n  _state__WEBPACK_IMPORTED_MODULE_1__[\"default\"].gameInPlay = true \r\n  requestAnimationFrame(update)\r\n}\r\n\r\nconst update = () => {\r\n  console.log(\"update function\")\r\n  requestAnimationFrame(update)\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./audio */ \"./src/audio/index.js\");\n/* harmony import */ var _audio__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_audio__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ \"./src/state/index.js\");\n/* harmony import */ var _domNodes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domNodes */ \"./src/domNodes/index.js\");\n/* harmony import */ var _hedges__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hedges */ \"./src/hedges/index.js\");\n\r\n\r\n\r\n\r\n//always contain the latest value of microphone sound level\r\nlet soundLevel = 0\r\n_audio__WEBPACK_IMPORTED_MODULE_0___default()( x => {\r\n  if(x) \r\n      soundLevel = x * _state__WEBPACK_IMPORTED_MODULE_1__[\"default\"].sensitivity\r\n})\r\n\r\ndocument.addEventListener('keydown', e => {\r\n    const key = e.keyCode \r\n    if(key === 32){\r\n      startGame()\r\n    }\r\n})\r\n\r\nconst startGame = () => {\r\n    _state__WEBPACK_IMPORTED_MODULE_1__[\"default\"].gameInPlay = true \r\n    Object(_hedges__WEBPACK_IMPORTED_MODULE_3__[\"default\"])()\r\n    requestAnimationFrame(updateScreen)\r\n}\r\n\r\nconst updateScreen = () => {\r\n  if(!_state__WEBPACK_IMPORTED_MODULE_1__[\"default\"].gameOver){    \r\n    // get container height \r\n    const containerHeight = Math.round(_domNodes__WEBPACK_IMPORTED_MODULE_2__[\"default\"].container.getBoundingClientRect().height)\r\n    // distance from top \r\n    const characterOffsetTop = _domNodes__WEBPACK_IMPORTED_MODULE_2__[\"default\"].character.offsetTop\r\n                          //if character is not touching the bottom\r\n    if(soundLevel < 400 && characterOffsetTop < containerHeight - 50 ) {\r\n        _domNodes__WEBPACK_IMPORTED_MODULE_2__[\"default\"].character.style.top = characterOffsetTop +4 + \"px\"\r\n    }                    // if character is not touching the top\r\n    else if(soundLevel > 400 && characterOffsetTop > 0){\r\n      _domNodes__WEBPACK_IMPORTED_MODULE_2__[\"default\"].character.style.top = characterOffsetTop -4 + \"px\"\r\n    }\r\n    moveHedges()\r\n    requestAnimationFrame(updateScreen)\r\n  }\r\n}\r\n\r\nconst moveHedges = () => {\r\n  const hedges = document.getElementsByClassName('hedge')\r\n  for(let hedge of hedges) {\r\n      let hedgeLeft = hedge.getBoundingClientRect().left \r\n      hedgeLeft--\r\n      if(hedgeLeft <= 0)\r\n        document.removeChild(hedge)\r\n      hedge.style.left = hedgeLeft + 'px'\r\n  }\r\n}\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -109,6 +109,30 @@ eval("// Courtesy www/0AV.com, LGPL license or as set by forked host, Travis Hol
 
 /***/ }),
 
+/***/ "./src/domNodes/index.js":
+/*!*******************************!*\
+  !*** ./src/domNodes/index.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst nodes = {\r\n    container: document.querySelector('.container'),\r\n    character: document.querySelector('.character')\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (nodes); \n\n//# sourceURL=webpack:///./src/domNodes/index.js?");
+
+/***/ }),
+
+/***/ "./src/hedges/index.js":
+/*!*****************************!*\
+  !*** ./src/hedges/index.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _domNodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../domNodes */ \"./src/domNodes/index.js\");\n\r\nconst createHedges = () => {    \r\n    const hedgeTop = document.createElement('div')\r\n    const hedgeBottom = document.createElement('div')\r\n\r\n    hedgeTop.setAttribute('class', 'hedge')\r\n    hedgeBottom.setAttribute('class', 'hedge')\r\n    \r\n    hedgeBottom.style.bottom = 0 \r\n\r\n    _domNodes__WEBPACK_IMPORTED_MODULE_0__[\"default\"].container.appendChild(hedgeTop)\r\n    _domNodes__WEBPACK_IMPORTED_MODULE_0__[\"default\"].container.appendChild(hedgeBottom)\r\n}\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (createHedges);\n\n//# sourceURL=webpack:///./src/hedges/index.js?");
+
+/***/ }),
+
 /***/ "./src/state/index.js":
 /*!****************************!*\
   !*** ./src/state/index.js ***!
@@ -117,7 +141,7 @@ eval("// Courtesy www/0AV.com, LGPL license or as set by forked host, Travis Hol
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// contain the current state of the game \r\nconst state = {\r\n    playerScore: 0,\r\n    gameSpeed: 1,\r\n    gameInPlay: false,\r\n    gameOver: false,\r\n    animationReapet: null\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (state); \n\n//# sourceURL=webpack:///./src/state/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n// contain the current state of the game \r\nconst states = {\r\n    playerScore: 0,\r\n    gameSpeed: 1,\r\n    gameInPlay: false,\r\n    gameOver: false,\r\n    sensitivity: 0.05\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (states);\n\n//# sourceURL=webpack:///./src/state/index.js?");
 
 /***/ })
 
