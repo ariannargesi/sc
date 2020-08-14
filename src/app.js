@@ -43,10 +43,12 @@ const updateScreen = () => {
 const moveHedges = () => {
   const hedges = document.getElementsByClassName('hedge')
   for(let hedge of hedges) {
-      let hedgeLeft = hedge.getBoundingClientRect().left 
-      hedgeLeft--
-      if(hedgeLeft <= 0)
-        document.removeChild(hedge)
+      let hedgeLeft = Math.round(hedge.getBoundingClientRect().left)
+      console.log(hedgeLeft)
+      hedgeLeft-= 2
+      if(hedgeLeft <= -30){
+        nodes.container.removeChild(hedge)
+      }
       hedge.style.left = hedgeLeft + 'px'
   }
 }
