@@ -1,6 +1,6 @@
 import nodes from '../domNodes'
+import states from '../state'
 const createHedges = () => {    
-    setInterval(() => {
     const hedgeTop = document.createElement('div')
     const hedgeBottom = document.createElement('div')
 
@@ -24,6 +24,5 @@ const createHedges = () => {
 
     nodes.container.appendChild(hedgeTop)
     nodes.container.appendChild(hedgeBottom)
-    }, 2000)
 }
 export default createHedges
