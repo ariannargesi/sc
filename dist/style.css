@@ -24,7 +24,6 @@ body {
 .hedge {
     background: greenyellow;
     position: absolute;
-    height: 200px;
     width: 100px;
     right: 0;
     background-image: url("images/wall-bg.jpg");
