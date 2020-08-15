@@ -58,6 +58,9 @@ const moveHedges = () => {
       hedge.style.left = hedgeLeft + 'px'
       if(RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())){
           states.gameOver = true 
+          nodes.startGame.innerHTML = "<p class='start-game-text'>Game Over</p>"
+          nodes.startGame.style.color = "red"
+          nodes.startGame.style.display = "flex"
       }
 
   }
