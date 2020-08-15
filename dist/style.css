@@ -1,7 +1,10 @@
 body {
     margin: 0;
-    padding: 0
+    padding: 0;
+    
 }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 .container {
     height: 100vh;
     width: 100%;
@@ -11,8 +14,10 @@ body {
 .character {
     width: 50px;
     height: 50px;
-    background-color: black;
+    background-image: url("images/ball-bg.png");
+    background-size: 50px 50px;
     border-radius: 100%;
+    animation:spin 0.5s linear infinite;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,9 +25,11 @@ body {
 .hedge {
     background: greenyellow;
     position: absolute;
-    height: 100px;
-    width: 30px;
+    height: 200px;
+    width: 100px;
     right: 0;
+    background-image: url("images/wall-bg.jpg");
+    background-size: 100px 100px;
 }
 .score-wrapper {
     font-size: 32px;
