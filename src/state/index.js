@@ -5,7 +5,10 @@ const states = {
     gameInPlay: false,
     gameOver: false,
     sensitivity: 0.04,
-    lock: false 
+    lock: false,
 }
-
+setInterval(() => {
+    states.gameSpeed++
+    console.log(states.gameSpeed)
+}, 10000)
 export default states
