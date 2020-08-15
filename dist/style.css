@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    
+    font-family: 'Orbitron', sans-serif;
 }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
@@ -17,7 +17,6 @@ body {
     background-image: url("images/ball-bg.png");
     background-size: 50px 50px;
     border-radius: 100%;
-    animation:spin 0.5s linear infinite;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,4 +36,38 @@ body {
     right: 10%;
     top: 5%;
     font-weight: 700;
+}
+.start-game {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+@keyframes start {
+    0% {
+        font-size: 3rem
+    }
+    25%{
+        font-size: 2.75
+    }
+    50% {
+        font-size: 2.5rem;
+    }
+    75%{
+        font-size: 2.75;
+    }
+    100% {
+        font-size: 3rem;
+    }
+}
+.start-game-text {
+    animation-name: start;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
