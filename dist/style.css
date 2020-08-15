@@ -2,13 +2,17 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Orbitron', sans-serif;
+    user-select: none;
+}
+*{
+    box-sizing: border-box;
 }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .container {
     height: 100vh;
     width: 100%;
-    background: #eee;
+    background: rgb(71, 71, 71);
     position: relative;
 }
 .character {
@@ -37,6 +41,8 @@ body {
     right: 10%;
     top: 5%;
     font-weight: 700;
+    color: white;
+    z-index:  99;
 }
 .start-game {
     position: absolute;
@@ -47,7 +53,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    z-index: 99;
+    flex-direction: column;
 }
 @keyframes start {
     0% {
@@ -71,4 +78,30 @@ body {
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    font-size: 3rem;
+}
+bold{
+    font-weight: 800;
+    font-size: 22px;
+    color: red;
+}
+p{
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+button.restart {
+    background: none;
+    color: red;
+    border: 3px solid red;
+    font-size: 18px;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    transition: 0.5s;
+    outline: none;
+    position: absolute;
+    top: 60%;
+
+}
+button.restart:hover {
+    background:rgba(255, 0, 0, 0.088);
 }
