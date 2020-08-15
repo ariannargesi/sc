@@ -20,7 +20,14 @@ document.addEventListener('keydown', e => {
 const startGame = () => {
     nodes.startGame.style.display = 'none'
     states.gameInPlay = true 
-    createHedges()
+    if(states.gameOver === false)
+    setInterval(() => {
+      if(states.gameOver === true)
+        clearInterval(createHedges)
+      else 
+      createHedges()
+    }, 2000);
+
     requestAnimationFrame(updateScreen)
 }
 
