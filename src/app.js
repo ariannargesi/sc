@@ -57,6 +57,7 @@ const updateScreen = () => {
 }
 
 const moveHedges = () => {
+  if(states.gameInPlay){
   const hedges = document.getElementsByClassName('hedge')
   for(let hedge of hedges) {
       let hedgeLeft = Math.round(hedge.getBoundingClientRect().left)
@@ -66,10 +67,11 @@ const moveHedges = () => {
       }
       hedge.style.left = hedgeLeft + 'px'
       if(RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())){
-          gameOver()
+          // gameOver()
       }
 
   }
+}
 }
 const updateScore = () => {
   const distances = []
