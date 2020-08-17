@@ -67,9 +67,9 @@ const moveHedges = () => {
       }
       hedge.style.left = hedgeLeft + 'px'
       if(RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())){
-          // gameOver()
+          gameOver()
+          console.log('collition')
       }
-
   }
 }
 }
