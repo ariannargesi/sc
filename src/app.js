@@ -39,17 +39,24 @@ const updateScreen = () => {
     const containerHeight = Math.round(nodes.container.getBoundingClientRect().height)
     // distance from top 
     const characterOffsetTop = nodes.character.offsetTop      
-                          //if character is not touching the bottom
-    if(soundLevel < 600 && soundLevel > 150 && characterOffsetTop < containerHeight - 50 && states.lock === false  ) {
-        nodes.character.style.top = characterOffsetTop + states.gameSpeed *2 + "px"
-    }                    // if character is not touching the top
-    else if(soundLevel > 550 && characterOffsetTop > 0){
+                       // if character is not touching the top
+    if(soundLevel > 400 && characterOffsetTop > 0){
+      console.log('go up')
       nodes.character.style.top = characterOffsetTop - states.gameSpeed *2 + "px"
       states.lock = true 
       setTimeout(() => {
         states.lock = false 
       }, 2000)
     }
+     
+//if character is not touching the bottom
+    else if(characterOffsetTop < containerHeight - 80 && states.lock === false  ) {
+        console.log('go down')
+        nodes.character.style.top = characterOffsetTop + states.gameSpeed * 2 + "px"
+    }
+    else {
+      console.log('something else is running')
+    }     
     moveHedges()
     updateScore()
     requestAnimationFrame(updateScreen)
@@ -67,8 +74,7 @@ const moveHedges = () => {
       }
       hedge.style.left = hedgeLeft + 'px'
       if(RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())){
-          gameOver()
-          console.log('collition')
+          // gameOver()
       }
   }
 }

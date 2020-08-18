@@ -1,11 +1,12 @@
-// contain the current state of the game 
+// contain the current state of the game
 const states = {
     playerScore: 0,
     gameSpeed: 3,
     gameInPlay: false,
     gameOver: false,
-    sensitivity: 0.04,
+    sensitivity: 0.03,
     lock: false,
+    lockDown: true,
 }
 setInterval(() => {
     states.gameSpeed++
