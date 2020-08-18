@@ -4,6 +4,7 @@ import nodes from './domNodes'
 import createHedges from './hedges'
 import { RectCircleColliding, setBallPosition } from './funcs'
 
+
 //always contain the latest value of microphone sound level
 let soundLevel = 0
 getMicSoundLevel((x) => {
@@ -17,6 +18,12 @@ document.addEventListener('keydown', (e) => {
     if (key === 32) {
         startGame()
     }
+})
+
+nodes.inputSlider.addEventListener('input', (e) => {
+    let value = e.target.value / 1000
+    value = value.toFixed(2)
+    states.sensitivity = value    
 })
 
 const startGame = () => {
@@ -129,9 +136,11 @@ const gameOver = () => {
 
 setInterval(() => {
     nodes.soundLevelNum.innerText = soundLevel
-    const color = soundLevel > 600 ? 'color-green' : null
+    const color = soundLevel > 600 ? 'sound-level-number color-green' : 'sound-level-number'
     nodes.soundLevelNum.setAttribute('class', color)
 }, 30)
 setInterval(() => {
     states.playerScore++
 }, 30)
+
+
