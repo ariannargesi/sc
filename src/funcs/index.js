@@ -1,3 +1,5 @@
+import nodes from '../domNodes' 
+
 // return true if the rectangle and circle are colliding
 export const RectCircleColliding = (circle, rect) => {
     circle.r = 40
@@ -24,4 +26,6 @@ export const RectCircleColliding = (circle, rect) => {
     return dx * dx + dy * dy <= circle.r * circle.r
 }
 
-export default RectCircleColliding
+export const setBallPosition = (position) => {
+    nodes.character.style.top = position + 'px'
+}
