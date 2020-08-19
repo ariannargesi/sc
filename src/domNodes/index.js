@@ -5,7 +5,9 @@ const nodes = {
     score: document.querySelector('.score'),
     startGame: document.querySelector('.start-game'),
     soundLevelNum: document.querySelector('.sound-level-number'),
-    inputSlider: document.querySelector('.slider')
+    inputSlider: document.querySelector('.slider'),
+    soundLevelHint: document.querySelector('.sound-level-hint'),
+    sensitivity: document.querySelector('.sensitivity')
 }
 
 export default nodes
