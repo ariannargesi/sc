@@ -6,6 +6,8 @@ body {
 }
 *{
     box-sizing: border-box;
+    margin:0;
+    padding:0;
 }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
@@ -42,7 +44,7 @@ body {
     top: 5%;
     font-weight: 700;
     color: white;
-    z-index:  99;
+    z-index:  100;
 }
 .start-game {
     position: absolute;
@@ -105,21 +107,10 @@ button.restart {
 button.restart:hover {
     background:rgba(255, 0, 0, 0.088);
 }
-.sound-level {
-    width: 170px;
-    height: 200px;
-    position: absolute;
-    left: 2%;
-    bottom: 2%;
-    display: flex;
-    color: white;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-.sound-level-number{
-    width: 100px;
-}
+
+
+
+
 .color-green {
     color: rgb(0, 255, 0);
 }
@@ -156,3 +147,106 @@ button.restart:hover {
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
+  .heightlight{
+      background-color: lightgreen;
+      color: black;
+  }
+  .t-center{
+      text-align: center;
+  }
+.sound-level-number {
+    position: absolute;
+    left: 3%;
+    bottom: 10%;
+    font-size: 14px;
+    z-index: 99;
+}
+.sound-level-number::before{
+    content: "sound level:   ";
+    color: gray;
+}
+.sensitivity {
+    position: absolute;
+    left: 18%;
+    bottom: 10%;
+    text-align: center;
+    display: flex;
+    height: 130px;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 99;
+    font-size: 14px;
+
+}
+.sound-level-hint {
+    position: absolute;
+    left: 32%;
+    bottom: 10%;
+    z-index: 99;
+}
+.sound-level-hint p {
+    font-size: 14px;
+    color: gray;    
+}
+
+.red{
+    color: red;
+}
+.green{
+    color: green;
+}
+.yellow {
+    color: yellow;
+}
+
+
+
+
+
+
+
+
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-25deg);
+    }
+
+    40% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(-25deg);
+    }
+
+    80% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+
+
+.demo {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+
+
+
