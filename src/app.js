@@ -151,6 +151,8 @@ setInterval(() => {
         className += "color-yellow"
     else if(soundLevel > 600)
         className += "color-green"
+    else 
+        className += 'color-gray'
     nodes.soundLevelNum.setAttribute('class', className)
 }, 30)
 setInterval(() => {
