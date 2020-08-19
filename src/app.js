@@ -27,8 +27,13 @@ nodes.inputSlider.addEventListener('input', (e) => {
 })
 
 const startGame = () => {
-    if (states.gameInPlay === false) {
+    if(states.gameOver) {
+        reStart()
+    }
+   else if (states.gameInPlay === false) {
         nodes.startGame.style.display = 'none'
+        nodes.soundLevelHint.style.display = "none"
+        nodes.sensitivity.style.display = "none"
         states.gameInPlay = true
         if (states.gameOver === false)
             intervalId = setInterval(() => {
@@ -86,7 +91,7 @@ const moveHedges = () => {
             }
             hedge.style.left = hedgeLeft + 'px'
             if (RectCircleColliding(nodes.character.getBoundingClientRect(), hedge.getBoundingClientRect())) {
-                // gameOver()
+                gameOver()
             }
         }
     }
@@ -106,21 +111,24 @@ const updateScore = () => {
 
 const reStart = () => {
     states.playerScore = 0
-    states.gameSpeed = 3
-    states.gameInPlay = false
+    states.gameInPlay = false 
     states.gameOver = false
-    states.lock = false
-    nodes.startGame.style.display = 'none'
+    nodes.startGame.style.display = 'none'  
     clearInterval(intervalId)
     // clear screen
     const hedges = document.getElementsByClassName('hedge')
-    for (let hedge of hedges) nodes.container.removeChild(hedge)
+    for (let hedge of hedges)
+    nodes.container.removeChild(hedge)
     startGame()
 }
 
 const gameOver = () => {
     states.gameOver = true
     states.gameInPlay = false
+    
+    nodes.sensitivity.style.display = "flex"
+    nodes.soundLevelHint.style.display = 'block'
+
     nodes.startGame.innerHTML = "<p class='start-game-text'>Game Over</p>"
     const restart = document.createElement('button')
     restart.setAttribute('class', 'restart')
@@ -128,6 +136,8 @@ const gameOver = () => {
     restart.innerText = 'Try Again'
     const score = document.createElement('p')
     score.innerText = 'You Score is: ' + states.playerScore
+
+    // const rate = document.createElement('')
 
     nodes.startGame.appendChild(restart)
     nodes.startGame.appendChild(score)
@@ -142,5 +152,6 @@ setInterval(() => {
 setInterval(() => {
     states.playerScore++
 }, 30)
+
 
 
