@@ -176,7 +176,7 @@ button.restart:hover {
     justify-content: space-between;
     z-index: 99;
     font-size: 14px;
-
+    color: gray;    
 }
 .sound-level-hint {
     position: absolute;
@@ -189,13 +189,13 @@ button.restart:hover {
     color: gray;    
 }
 
-.red{
+.color-red{
     color: red;
 }
-.green{
+.color-green{
     color: green;
 }
-.yellow {
+.color-yellow {
     color: yellow;
 }
 
