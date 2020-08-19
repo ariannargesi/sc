@@ -27,5 +27,18 @@ export const RectCircleColliding = (circle, rect) => {
 }
 
 export const setBallPosition = (position) => {
-    nodes.character.style.top = position + 'px'
+    nodes.character.style.top = position + 'px' 
+}
+
+export const scoreRating = (score) => {
+    if(score < 400)
+        return "Very Bad"
+    else if(score > 400 && score < 600)
+        return "Not Bad"
+    else if(score > 600 && score < 800)
+        return "Well Done"
+    else if(score > 800 && score < 1000)
+        return "Good Record"
+    else if (score > 1000)
+        return "Your Are a Rock Start"
 }
