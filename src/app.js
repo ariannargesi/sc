@@ -146,8 +146,12 @@ const gameOver = () => {
 
 setInterval(() => {
     nodes.soundLevelNum.innerText = soundLevel
-    const color = soundLevel > 600 ? 'sound-level-number color-green' : 'sound-level-number'
-    nodes.soundLevelNum.setAttribute('class', color)
+    let className = 'sound-level-number '
+    if(soundLevel > 200 && soundLevel < 600)
+        className += "color-yellow"
+    else if(soundLevel > 600)
+        className += "color-green"
+    nodes.soundLevelNum.setAttribute('class', className)
 }, 30)
 setInterval(() => {
     states.playerScore++
