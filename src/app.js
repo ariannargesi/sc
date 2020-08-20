@@ -117,8 +117,10 @@ const reStart = () => {
     clearInterval(intervalId)
     // clear screen
     const hedges = document.getElementsByClassName('hedge')
+    while(hedges.length){
     for (let hedge of hedges)
-    nodes.container.removeChild(hedge)
+        nodes.container.removeChild(hedge)    
+    }
     startGame()
 }
 
