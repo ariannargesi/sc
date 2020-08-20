@@ -4,7 +4,7 @@
   "description": "voice based game using vinlla javascript ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack --watch"
   },
   "repository": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/ariannargesi/sc#readme",
   "dependencies": {
-
+    "jest": "^26.4.0"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
